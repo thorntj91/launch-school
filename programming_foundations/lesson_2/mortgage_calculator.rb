@@ -4,8 +4,7 @@ def mortage_payment(annual_rate, duration, amount)
   dur_in_months = duration * MONTHS_IN_YEAR
   monthly_rate = (annual_rate / MONTHS_IN_YEAR) / 100
 
-  amount * (monthly_rate * (1 + monthly_rate)**dur_in_months) /
-    ((1 + monthly_rate)**dur_in_months - 1)
+  amount * ( monthly_rate / ( 1 - (1 + monthly_rate)**-dur_in_months))
 end
 
 def integer?(num)
@@ -20,6 +19,10 @@ def number?(num)
   float?(num) || integer?(num)
 end
 
+def positive?(num)
+  num.to_f > 0
+end
+
 def prompt(message)
   puts "=> #{message}"
 end
@@ -29,7 +32,7 @@ def prompt_input(message)
     prompt(message)
     input = gets.chomp
 
-    return input if number?(input) && input.to_f > 0
+    return input if number?(input) && positive?(input)
 
     prompt('Number is invalid, please try again')
   end
