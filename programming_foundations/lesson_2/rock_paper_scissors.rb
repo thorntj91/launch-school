@@ -1,7 +1,7 @@
 VALID_CHOICES = { r: 'rock', p: 'paper', s: 'scissors', l: 'lizard',
-  sp: 'spock' }.freeze
+                  sp: 'spock' }.freeze
 
-score = 0 
+score = 0
 
 def prompt(message)
   puts "=> #{message}"
@@ -17,7 +17,7 @@ end
 
 def update_score(player, computer, score)
   score += 1 if win?(player, computer)
-  
+
   if win?(computer, player)
     score -= 1 unless score == 0
   end
@@ -38,14 +38,14 @@ loop do
   choice = ''
   loop do
     prompt('Choose one of the following: ')
-    choices = VALID_CHOICES.map{|key, value| "#{value} (#{key})"}.join(', ')
+    choices = VALID_CHOICES.map { |key, value| "#{value} (#{key})" }.join(', ')
     prompt(choices)
     choice = gets.chomp
 
-    if VALID_CHOICES.has_key?(choice.to_sym)
+    if VALID_CHOICES.key?(choice.to_sym)
       choice = VALID_CHOICES[choice.to_sym]
       break
-    elsif VALID_CHOICES.has_value?(choice)
+    elsif VALID_CHOICES.value?(choice)
       break
     else
       prompt("That's not a valid choice.")
