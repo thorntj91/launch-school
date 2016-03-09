@@ -1,0 +1,27 @@
+Q1.
+flintstones = %w(Fred Barney Wilma Betty BamBam Pebbles)
+
+Q2.
+flintstones << "Dino"
+
+Q3.
+flintstones.push("Dino", "Happy")
+
+Q4.
+advice.slice!(0, advice.index('house'))
+
+Q5.
+statement = "The Flintstones Rock!"
+statement.split("").count("t")
+
+Q6.
+title = "Flintstone Family Members"
+
+padding = (40 - title.length) / 2
+
+padding.times do 
+  title.prepend(" ")
+  title << " "
+end
+
+

@@ -1,0 +1,61 @@
+Q1. 
+1 2 2 3
+
+Q2. 
+The difference between ! and ? depends on the context.
+
+1) != is the inequality operator, it is a binary operator that
+takes two expressions as operands and compares their values for inequality.
+!= will return true iff its two operands are not equal.
+
+2) When ! is used as a prefix it functions as a unary operator for negation.
+!user_name for example, would return a boolean value which is the negation
+of user_name's truth value.
+
+3) ! used at the end of a method is syntactic sugar to improve readibility.
+It indicates that the method either mutates its caller or performs some kind
+or destructive operation. Given an array 'words', words.uniq! for example would
+update the original words array with a reduced array containing only unique 
+words. 
+
+4) ? is undefined as a unary prefix operator 
+
+5) ? is used appended to methods to indicate that they return a boolean value
+this isn't enforced by ruby, it's simply further syntactic sugar to improve 
+code clarity and readibility.
+
+6) !! functions the same way as 2) It is double negation. In otherwords, it will
+return the boolean value of the statement it is called upon. 
+
+? : is also the ternary operator when used with a condition and two statements.
+if_this_is_true ? then_this : else_this
+
+Q3.
+advice.sub!(/important/, "urgent")
+
+Q4.
+numbers.delete_at(1) # Deletes element at index 1
+numbers.delete(1) # Deletes element 1
+
+Q5.
+(10..100).include?(42)
+
+Q6.
+"Four score and " + famous_words 
+famous_words.prepend("Four score and")
+
+Q7.
+add_eight is called 5 times. Therefore 2+(5*8) = 42
+
+Q8.
+Given that flintstones is a nested array
+flintstones.flatten!
+Will reduce the nested array into a 1 dimensional array.
+
+Q9.
+flintstones.assoc("Barney")
+
+hash = {}
+flintstones.each_with_index do |element, index|
+  hash[element] = index
+end
