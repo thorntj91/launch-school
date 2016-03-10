@@ -1,0 +1,75 @@
+Q1.
+string = "The Flintstones Rock!"
+
+10.times { string.prepend(" "); puts string}
+
+Q2. 
+hash = {}
+statement.split("").each { |c| hash[c] = statement.count(c) }
+
+Q3.
+puts "the value of 40 + 2 is " + (40 + 2)
+
+There is an conversion from a number to a string. This needs to be 
+handled explicitly.
+
+This can be fixed by using string interpolation for the arithmetic 
+
+puts "the value of 40 + 2 is #{(40 + 2)}"
+
+or via conversion
+
+puts "the value of 40 + 2 is " + (40 + 2).to_s
+
+
+Q4.
+1
+3
+=> [3, 4]
+
+1
+2
+=> [1, 2]
+
+The code does not perform as expected as the iterator appears to operate on 
+the current values of the array, not the original array.
+
+Q5.
+Use a while loop
+while dividend > 0 
+
+Bonus 1
+Checks if the dividend is a factor by testing if it is evenly divisible
+
+Bonus 2
+Ruby will use the result of the last expression as the return value if not
+otherwise specified. 
+
+Q6.
+The second implementation works with a second array in concatinating it to 
+the buffer. This does not modify the array passed, whereas in the first implementation the input is worked on directly.
+
+Q7.
+The error suggests that limit (in the context of the method) is undefined.
+This is because the limit that Ben was hoping to use was out of scope of the method.
+This can be fixed by passing limit to fib as an argument.
+
+Q8.
+
+def titleize(string)
+  string = string.split(' ').each { |w| w.capitalize! }
+  string.join(' ')
+end
+
+Q9.
+munsters.each do |name, hash|
+  case hash["age"]
+  when 0..17
+    hash["age_group"] = "kid"
+  when 18..64
+    hash["age_group"] = "adult"
+  else
+    hash["age_group"] = "senior"
+  end
+end
+

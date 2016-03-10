@@ -1,0 +1,39 @@
+Q1.
+total = 0
+munsters.each do |name, hash|
+    total += hash["age"] if hash["gender"] == "male"
+end
+
+Q2.
+munsters.each do |name, hash|
+  puts "#{name} is a #{hash["age"]} year old #{hash["gender"]}"
+end
+
+Q3.
+
+def tricky_method2(a_string_param, an_array_param)
+  a_string_param += "rutabaga"
+  an_array_param += ["rutabaga"]
+
+  return a_string_param, an_array_param
+end
+
+Q4.
+sentence = "Humpty Dumpty sat on a wall"
+
+sentence.split(' ').reverse.join(' ')
+
+Q5.
+34
+
+Q6.
+The original data is modified because the demo hash stores a pointer to
+the original hash so it is that hash which the method works upon.
+
+Q7.
+paper
+
+Q8.
+foo() # => "yes"
+
+bar("yes") # => "no"

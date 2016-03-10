@@ -1,0 +1,52 @@
+Q1.
+Same ID
+
+a_outer changes after reassignment
+b_outer 
+c_outer changes after reassignment
+d_outer_id changes because it point to a different FixNum
+
+Inner assignments will store a reference to the outer objects
+
+Q2.
+
+outer_inner's contain each of the outer object ids
+  a_outer_inner_id = a_outer.object_id
+  b_outer_inner_id = b_outer.object_id
+  c_outer_inner_id = c_outer.object_id
+  d_outer_inner_id = d_outer.object_id
+
+Mutates the objects pointed to by the outer variables
+  a_outer = 22
+  b_outer = "thirty three"
+  c_outer = [44]
+  d_outer = c_outer[0]
+
+Inners point to the same objects defined above
+  a_inner = a_outer
+  b_inner = b_outer
+  c_inner = c_outer
+  d_inner = c_inner[0]
+
+Inner_id's contain the id of the outer objects
+  a_inner_id = a_inner.object_id
+  b_inner_id = b_inner.object_id
+  c_inner_id = c_inner.object_id
+  d_inner_id = d_inner.object_id
+
+  ugh oh
+
+  Q3.
+"My string looks like this now: pumpkins"
+"My array looks like this now: ["pumpkins", "rutabaga"] "
+
+The string is a reassignment as it is short hand for
+a_string_param = a_string_param + "rutabaga"
+
+This creates a new local variable whose value is result of the expression of concatenating the value of the original a_string_param to the string literal "rutabaga"
+
+The << method pushes the string literal onto the original array. It does not create a copy first.
+
+
+Q5.
+color == "blue" || color == "green" 
