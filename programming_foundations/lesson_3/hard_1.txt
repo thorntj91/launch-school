@@ -1,0 +1,43 @@
+Q1.
+
+Greeting will be undefined as the conditional branch that contains its assignment will never run.
+
+Answer: Initialising a variable in an if block will be initialised to nil even if its assignment is not executed.
+
+Q2.
+=> "hi there"
+
+informal_greeting points to the same 'hi' object that is referenced under :a in the greetings hash.
+
+Q3.
+A)
+B)
+The assignments are local to the method
+
+C)
+.gsub() is destructive. It modifies the objects that were passed as parameters 
+
+Q4.
+
+def UUID
+  hex_set = ('a'..'f').to_a + ('0'..'9').to_a
+  
+  section_lengths = [8,4,4,4,12]
+  uuid = ''
+  section_lengths.each do |length|
+    length.times { uuid += hex_set.sample }
+    uuid += '-' unless length == 12
+  end
+  uuid
+end
+
+Q5.
+
+def dot_separated_ip_address?(input_string)
+  dot_separated_words = input_string.split(".")
+
+  return false if dot_separated_words.size != 4
+
+  dot_separated_words.each { |word| return false if !is_a_number(word) }
+  true
+end
