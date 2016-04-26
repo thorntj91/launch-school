@@ -1,0 +1,88 @@
+Local variables
+
+1)
+
+The local variable str is initialised to 1 in the outer scope (relative to loop).
+In the loop str is reassigned with the value 2 so that it now points to a 2 object in memory.
+Since the loop breaks at this point and control returns to the outer scope.
+puts() will print the current value of str which is now 2.
+
+2)
+str is an undefined local variable. The str that was assigned in the loop has scope only within the bounds that loop. In the outer context, it does not exist.
+
+3)
+No you cannot say with certainty that it will run. If the variable str has not been initialised somewhere in the omitted code outside of that loop, then it will raise an exception as it will be undefined in that context.
+
+4)
+In a_method, the puts method's argument str is undefined. 
+This is because it has not been initialised within the scope of a_method, or has been received as a value through its parameter when it was called.
+
+5)
+In this example, the two str variables are different variables. They do not share the same scope. 
+When a_method is called, it initialised its local method variable of the same name with "world".
+This does not modify the variable in the outer scope as it only has scope within that method, so puts() prints "hello" to the standard output.
+The important thing to note here is that methods have their own scope and must permit access to the outside through their parameters.
+
+6)
+Initially a string object "hello" is created and assigned to 'a'. 
+'a' is then assigned to 'b', which in effect creates a pointer the same object that 'a' points to.
+'a' is then reassigned to "hi" and then is appended with " world"
+'b' has not been reassigned and still points to "hello"
+
+7)
+There are two objects and 4 variables. The strings "hello" and "world".
+After the code has been run, 
+a, b and c point to "hello" and d points to "world".
+This is because initially 'a' and 'b' point to separate objects. 
+Subsequently 'c' and 'd' respectively are assigned pointers to the same objects which 'a' and 'b' point to. Finally 'b' is pointed to 'a' with a reassignment leaving only 'd' = "world". a = c does not affect the pointers.
+
+
+Mutating Method Arguments
+
+1)
+The last line prints "hello" still because the string concatination expression in change(), is non-destructive and does not modify the original greeting variable.
+
+2)
+The last line now prints "hello world" because the << method/operator appends the argument passed to it to the original string object which called it. 
+param which points to the same object as greeting has called << and so the original string object is modified. This demonstates the << method is destructive as it mutates its caller.
+
+3)
+In this case, change() now reassigns its local variable param with the value "hi". As a consequence "hi" is now mutated, with " world" being appended.
+Outside of the method, greeting has went unmodified and puts() will print "hello".
+
+4)
+param is initally reassigned with the += method at the start of change().
+This first creates a copy of the "hello" object referenced by greeting and concatenates the string "hey" onto it.
+param is then reassigned to "hi" replacing the modified copy that was just there.
+In the last line the new "hi" object is mutated in having " world" appended to it.
+Because at the very start of the method param had its pointer reassigned away from greeting's "hello", subsequent statements in the method leave greeting unmodified and puts() prints "hello".
+
+Working with collections
+
+1)
+Array#map returns a new array based on the block's return value. It is transformation wherein each element is transformed according to what is returned at the end of the block.
+
+2)
+Array#select returns a new array based on the block's return values. If true then that element is included in the final array returned.
+
+3)
+The expressions 
+
+n + 1 
+and 
+n += 1 
+
+Both return the value of n + 1. The difference is that the block parameter 'n' which is populated with the current element being iterated is reassigned with the result of n + 1. In contrast the expression n + 1 returns that value but is not stored. 
+Because of this, I prefer the first implementation since it is a waste of an operation to store that variable unecessarily when all map() cares about is the return value of its block.
+
+4)
+The last statement in this block returns a boolean value. Since map() returns an array of elements transformed according the the blocks return value, the block will return a set of booleans since n > 2 will evaluate to true or false. 
+
+5)
+The last statement in the modified block is now a puts() call on the element. Although puts() will print out the element, the method itself returns nil. Therefore map() will use nil to populate the array since it is now the return value of the block. The resulting 'arr' will contain an array of nils.
+
+6)
+Select works by populating its returned array according to the truthiness of its block's return value. Every object and non conditional expression in Ruby evaluates to true with the exceptions of nil and false. Therefore, n + 2 will evaluate to true on each iteration and so the resulting array will select all elements from the original array. i.e. [1, 2, 3].
+
+7)
+arr will contain an empty array. The last line in select's block returns nil, which evaluates to false. Therefore each iteration will return false and no elements will be selected to populate the resulting array. 
