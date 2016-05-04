@@ -1,6 +1,15 @@
 class MyCar
   attr_accessor :color
-  attr_reader :year
+  attr_reader :year, :model
+
+  
+  def self.mileage(miles, gallons)
+    puts "#{miles / gallons}mpg"
+  end
+
+  def to_s
+    puts "#{self.year} - #{self.color} - #{self.model}"
+  end
 
   def initialize(year, color, model)
     @speed = 0
@@ -45,3 +54,7 @@ puts car.color
 
 car.spray_paint("Neon Pink")
 puts car.color
+
+MyCar.mileage(480, 8)
+
+car.to_s

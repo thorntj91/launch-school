@@ -1,0 +1,3 @@
+No mutator method was found since only an attr_reader was defined, providing only an accessor/getter. 
+
+attr_accessor would create methods for reading and writing.
