@@ -1,0 +1,2 @@
+# Ruby will print the default string representation of that object as implemented by the .to_s method of that object. If no implemenation is provided the object ID will be printed by default
+# This can be verified by reading the documentation
