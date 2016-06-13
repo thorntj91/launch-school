@@ -1,0 +1,1 @@
+# The functionality of both versions of the class are identical. 
