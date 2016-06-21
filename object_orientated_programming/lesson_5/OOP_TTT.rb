@@ -30,12 +30,28 @@ class Board
     !!winning_marker
   end
 
+  def vulnerable_square?
+    !!vulnerable_square
+  end
+
   # returns winning marker or nil
   def winning_marker
     WINNING_LINES.each do |line|
       squares = @squares.values_at(*line)
       if three_identical_markers?(squares)
         return squares.first.marker
+      end
+    end
+    nil
+  end
+
+  def vulnerable_square
+    WINNING_LINES.each do |line|
+      squares = @squares.values_at(*line)
+      if two_player_markers?(squares)
+        line.each do |index|
+          return index if @squares[index].marker == " "
+        end
       end
     end
     nil
@@ -67,6 +83,12 @@ class Board
       markers.min == markers.max
     end
 
+    def two_player_markers?(squares)
+      markers = squares.select(&:marked?).collect(&:marker)
+      return true if markers.count("X") == 2
+      false
+    end
+
 
 end
 
@@ -95,9 +117,11 @@ end
 
 class Player
   attr_reader :marker
+  attr_accessor :score
 
   def initialize(marker)
     @marker = marker
+    @score = 0
   end
 end
 
@@ -118,22 +142,35 @@ class TTTGame
   def play
     display_welcome_message
     loop do
-      display_board
       loop do
-        current_player_moves
-        break if board.someone_won? || board.full?
-        clear_screen_and_display_board if human_turn?
+        display_board
+        loop do
+          current_player_moves
+          break if board.someone_won? || board.full?
+          clear_screen_and_display_board if human_turn?
+        end
+        if !board.winning_marker.nil?
+          board.winning_marker == HUMAN_MARKER ? human.score += 1 : computer.score += 1
+        end
+        display_result
+        break if game_over?
+        puts "Press enter to continue"
+        gets.chomp
+        reset_match
       end
-      display_result
       break unless play_again?
-      reset
       display_play_again_message
+      reset
     end
     display_goodbye_message
   end
 
-  private 
-  
+  private
+
+  def game_over?
+    human.score == 5 || computer.score == 5
+  end
+
   def clear
     system 'clear'
   end
@@ -164,7 +201,11 @@ class TTTGame
   end
 
   def computer_moves
-    board.set_square_at(board.unmarked_keys.sample, computer.marker)
+    if board.vulnerable_square?
+      board.set_square_at(board.vulnerable_square, computer.marker)
+    else
+      board.set_square_at(board.unmarked_keys.sample, computer.marker)
+    end
   end
 
   def display_welcome_message
@@ -180,6 +221,7 @@ class TTTGame
     puts "You're a #{human.marker}. Computer is a #{computer.marker}"
     puts ""
     board.draw
+    display_score
     puts ""
   end
 
@@ -191,7 +233,6 @@ class TTTGame
 
   def display_result
     display_board
-
     case board.winning_marker
     when human.marker
       puts "You won!"
@@ -200,6 +241,12 @@ class TTTGame
     else
       puts "It's a tie"
     end
+  end
+
+  def display_score
+    puts ""
+    puts "You: #{human.score}"
+    puts "Computer: #{computer.score}"
   end
 
   def play_again?
@@ -213,10 +260,16 @@ class TTTGame
     answer == 'y'
   end
 
-  def reset
+  def reset_match
     board.reset
     @current_player = FIRST_TO_MOVE
     clear
+  end
+
+  def reset
+    human.score = 0
+    computer.score = 0
+    reset_match
   end
 
   def display_play_again_message
