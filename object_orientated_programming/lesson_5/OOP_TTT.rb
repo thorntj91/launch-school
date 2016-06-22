@@ -10,11 +10,7 @@ class Board
     reset
   end
 
-  def get_square_at(key)
-    @squares[key]
-  end
-
-  def set_square_at(key, marker)
+  def []=(key, marker)
     @squares[key].marker = marker
   end
 
@@ -30,10 +26,6 @@ class Board
     !!winning_marker
   end
 
-  def vulnerable_square?
-    !!vulnerable_square
-  end
-
   # returns winning marker or nil
   def winning_marker
     WINNING_LINES.each do |line|
@@ -45,10 +37,10 @@ class Board
     nil
   end
 
-  def vulnerable_square
+  def find_vulnerable_square(marker)
     WINNING_LINES.each do |line|
       squares = @squares.values_at(*line)
-      if two_player_markers?(squares)
+      if two_identical_markers?(squares, marker)
         line.each do |index|
           return index if @squares[index].marker == " "
         end
@@ -83,15 +75,13 @@ class Board
       markers.min == markers.max
     end
 
-    def two_player_markers?(squares)
+    def two_identical_markers?(squares, marker)
       markers = squares.select(&:marked?).collect(&:marker)
-      return true if markers.count("X") == 2
+      return true if markers.count(marker) == 2
       false
     end
 
-
 end
-
 
 class Square
   INITIAL_MARKER = " "
@@ -141,10 +131,10 @@ class TTTGame
 
   def play
     display_welcome_message
-    loop do
-      loop do
+    loop do # main game loop
+      loop do # match loop
         display_board
-        loop do
+        loop do # player turns
           current_player_moves
           break if board.someone_won? || board.full?
           clear_screen_and_display_board if human_turn?
@@ -201,11 +191,17 @@ class TTTGame
   end
 
   def computer_moves
-    if board.vulnerable_square?
-      board.set_square_at(board.vulnerable_square, computer.marker)
-    else
-      board.set_square_at(board.unmarked_keys.sample, computer.marker)
-    end
+    square = nil
+    # Offense
+    square = board.find_vulnerable_square(COMPUTER_MARKER) if !square 
+    # Defense
+    square = board.find_vulnerable_square(HUMAN_MARKER)
+    # Pick middle
+    square = 5 if !square
+    # Else pick random
+    square = board.unmarked_keys.sample if !square
+
+    board[square] = COMPUTER_MARKER
   end
 
   def display_welcome_message
@@ -229,7 +225,6 @@ class TTTGame
     clear
     display_board
   end
-
 
   def display_result
     display_board
