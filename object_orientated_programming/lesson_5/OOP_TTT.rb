@@ -14,6 +14,10 @@ class Board
     @squares[key].marker = marker
   end
 
+  def [](key)
+    @squares[key].marker
+  end
+
   def unmarked_keys
     @squares.keys.select { |key| @squares[key].unmarked? }
   end
@@ -107,11 +111,12 @@ end
 
 class Player
   attr_reader :marker
-  attr_accessor :score
+  attr_accessor :score, :name
 
   def initialize(marker)
     @marker = marker
     @score = 0
+    @name = nil
   end
 end
 
@@ -130,6 +135,7 @@ class TTTGame
   end
 
   def play
+    set_player_names
     display_welcome_message
     loop do # main game loop
       loop do # match loop
@@ -187,24 +193,25 @@ class TTTGame
       break if board.unmarked_keys.include?(square)
       puts "Sorry, that's not a valid choice."
     end
-    board.set_square_at(square, human.marker)
+    board[square] = HUMAN_MARKER
   end
 
   def computer_moves
     square = nil
     # Offense
-    square = board.find_vulnerable_square(COMPUTER_MARKER) if !square 
+    square = board.find_vulnerable_square(COMPUTER_MARKER) 
     # Defense
-    square = board.find_vulnerable_square(HUMAN_MARKER)
+    square = board.find_vulnerable_square(HUMAN_MARKER) if !square
     # Pick middle
-    square = 5 if !square
+    square = 5 if board[5] == Square::INITIAL_MARKER
+    binding.pry
     # Else pick random
     square = board.unmarked_keys.sample if !square
-
     board[square] = COMPUTER_MARKER
   end
 
   def display_welcome_message
+    clear
     puts "Welcome to Tic Tac Toe!"
     puts ""
   end
@@ -214,7 +221,7 @@ class TTTGame
   end
 
   def display_board
-    puts "You're a #{human.marker}. Computer is a #{computer.marker}"
+    puts "#{human.name} is a #{human.marker}. #{computer.name} is a #{computer.marker}"
     puts ""
     board.draw
     display_score
@@ -240,8 +247,8 @@ class TTTGame
 
   def display_score
     puts ""
-    puts "You: #{human.score}"
-    puts "Computer: #{computer.score}"
+    puts "#{human.name}: #{human.score}"
+    puts "#{computer.name}: #{computer.score}"
   end
 
   def play_again?
@@ -270,6 +277,17 @@ class TTTGame
   def display_play_again_message
     puts "Let's play again!"
     puts ""
+  end
+
+  def set_player_names
+    puts "Please enter a name: "
+    human.name = gets.chomp
+    computer.name = generate_computer_name
+  end
+
+  def generate_computer_name
+    "#{("A".."Z").to_a.sample}#{("A".."Z").to_a.sample}-" + 
+      "#{(0..9).to_a.sample}#{(0..9).to_a.sample}"
   end
 
 end
