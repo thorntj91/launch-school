@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  </head>
+
+  <body>
+    <form action="" method="post">
+      <fieldset>
+        <dl>
+          <dt><label for="movie">Movie</label></dt>
+          <dd>
+            <select id="movie" name="movie">
+              <option value="Looper">Looper</option>
+              <option value="Frozen">Frozen</option>
+              <option value="Tommy Boy">Tommy Boy</option>
+            </select>
+          </dd>
+
+          <dt><label for="slider">Rating</label></dt>
+          <dd>
+            <input type="range" id="slider" name="rating" min="0" max="5" step="1"/>
+          </dd>
+        </dl>
+
+        <label><input type="checkbox" name="favourite"/>Add to your favourites?</label>
+
+        <input type="button" value="Rate movie"/>
+      </fieldset>
+    </form>
+  </body>
+</html>
