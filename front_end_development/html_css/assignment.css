@@ -1,0 +1,59 @@
+body {
+  background-image: url("company_splash_page/bg_body.gif");
+  background-repeat: repeat;
+  background-color: #332288;
+}
+
+header img {
+  display: block;
+  margin: 0 auto;
+  padding: 55px;
+}
+
+main {
+ text-align: center;
+ width: 900px;
+ background-color: #ffffff;
+ margin: 0 auto;
+ padding: 50px 55px;
+ font-family: Helvetica, Arial, sans-serif;
+}
+
+article {
+  padding: 50px 20px;
+}
+
+article h2, p {
+  color: #444444;
+}
+
+article h2 {
+  font-size: 38px;
+}
+
+article p {
+  font-size: 20px;
+  padding: 0px 40px;
+}
+
+article h3 {
+  color: #0099CC;
+  font-size: 22px
+}
+
+footer {
+  background-color: #e5e5e5;
+  width: 900px;
+  height: 120px;
+  margin: 0 auto 105px auto;
+  padding: 0px 55px;
+}
+
+footer img {
+  display: inline-block;
+  padding: 33px 50px;
+}
+
+.social {
+  text-align: center;
+}
