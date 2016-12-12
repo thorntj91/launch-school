@@ -1,0 +1,27 @@
+#absolute {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  height: 100px;
+  width: 200px;
+  margin-left: -200px;
+  background-color: beige;
+}
+
+#fixed {
+  height:720px;
+  width: 1366px;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.6);
+  position: fixed;
+}
+
+#square {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: #fcfc99;
+}
