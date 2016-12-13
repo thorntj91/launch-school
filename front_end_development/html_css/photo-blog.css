@@ -6,7 +6,7 @@ body {
 
 header {
   width: 920px;
-  padding: 20 20px;
+  padding: 20px 20px;
   margin: 0 auto;
 }
 
@@ -16,25 +16,75 @@ header > h1 {
   color: #193441;
   background: transparent url(logo.png) 0 0 no-repeat;
   padding: 45px 0 15px 115px;
+  float: left;
 }
 
-nav {padding: 56px 0;}
+nav {
+  padding: 75px 0 0 0;
+  float: right;
+}
 
-li a {
+nav li {
   display: inline-block;
-  padding: 0px 5px;
   background-color: #fcfff5;
-  height: 45px;
-  width: 120px;
-  text-decoration: none;
-  color: #91aa9d;
-  vertical-align: middle;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
-section {
+nav a {
+  display: block;
+  padding: 11px 39px 15px 39px;
+  text-decoration: none;
+  color: #91aa9d;
+  vertical-align: middle;
+}
+
+.active {
+  background-color: #91aa9d;
+  color: #fcfff5;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+main {
   height: 1192px;
-  width: 960px;
+  width: 940px;
   background: #FFFFFF;
+  margin: 0 auto;
+  clear:  both;
+  box-shadow: 0px 5px 5px #bbbbbb;
+}
+
+main h2 {
+  font-size: 28px;
+  color: #3e606f;
+  padding: 20px 30px 0px 30px;
+}
+
+main p {
+  padding: 20px 30px 0px 30px;
+  color: #3e606f;
+}
+
+figure > img {
+  padding: 10px 30px 10px 25px;
+  float: right;
+}
+
+.main-image {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30px 30px 10px 30px;
+}
+
+footer {
+  width: 940px;
+  height: 100px;
+  margin-left: 189px;
+  padding: 10px;
+}
+
+footer > p {
+  font-size: 15px;
+  color:#3e606f;
 }
